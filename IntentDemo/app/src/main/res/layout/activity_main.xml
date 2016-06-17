@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBackground"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+    <EditText
+        android:id="@+id/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:hint="Type Cell no"
+        android:inputType="number"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColorHint="@color/colorText"
+        />
+
+    <EditText
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:gravity="center"
+        android:hint="Type mail ID"
+        android:inputType="textEmailAddress"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColorHint="@color/colorText"
+        />
+
+    <EditText
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="web site"
+        android:inputType="textUri"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColorHint="@color/colorText"
+        android:textStyle="italic"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:capitalize="none"
+        android:onClick="fullName"
+        android:text="Procede"
+        android:textStyle="bold"/>
+</LinearLayout>

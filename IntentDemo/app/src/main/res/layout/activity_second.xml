@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:background="@color/colorBackground"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/colorPart1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textViewPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:onClick="makeCall"
+            android:text="mobile"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+            <Button
+                android:id="@+id/call"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:onClick="makeCall"
+                android:text="call"/>
+
+            <Button
+                android:id="@+id/sms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="makeSms"
+                android:text="SMS"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextSmsSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="4dp"
+            android:hint="Type SMS/MMS body"
+            android:textColorHint="@color/colorText"
+            android:inputType="textMultiLine"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPart3"
+
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:text="email"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/buttonEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="makeEmail"
+                android:text="Email"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextEmailSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorText"
+            android:hint="Subject"/>
+
+        <EditText
+            android:id="@+id/editTextCC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="CC"
+            android:textColorHint="@color/colorText"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/editTextBCC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColorHint="@color/colorText"
+            android:hint="BCC"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/editTextEmailBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColorHint="@color/colorText"
+            android:hint="Body: type mail here"
+            android:inputType="textMultiLine"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPart2"
+        >
+
+        <TextView
+            android:id="@+id/textViewUrl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:text="url"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="italic"/>
+
+        <Button
+            android:id="@+id/buttonUrl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="makeGo"
+            android:text="Go"/>
+    </LinearLayout>
+</LinearLayout>
