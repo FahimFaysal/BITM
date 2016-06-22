@@ -44,7 +44,7 @@ public class SecondActivity extends AppCompatActivity {
         email = intent.getStringExtra("email");
         url = intent.getStringExtra("url");
 
-        Log.d("fahim fasyaol", phone + email + url);
+        Log.d("fahim faysal", phone + email + url);
 
         tvPhone.setText(phone);
         tvEmail.setText(email);

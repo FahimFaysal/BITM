@@ -53,6 +53,6 @@
         android:layout_margin="40dp"
         android:capitalize="none"
         android:onClick="fullName"
-        android:text="Procede"
+        android:text="Proceed"
         android:textStyle="bold"/>
 </LinearLayout>
