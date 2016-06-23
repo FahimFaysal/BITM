@@ -260,19 +260,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String calculate(String mainEquation) {
         try {
-            if (mainEquation.charAt(0) == 'x' || mainEquation.charAt(0) == '/') {
-                return "wrong equation";
-            } else if (!Character.isDigit(mainEquation.charAt(mainEquation.length() - 1)) && mainEquation.charAt(mainEquation.length() - 1) != '.') {
 
-                return "wrong equation";
-            }/* else {
-            for (int i = 0; i < mainEquation.length() - 1; i++) {
-                if (!Character.isDigit(mainEquation.charAt(i)) && !Character.isDigit(mainEquation.charAt(i + 1))) {
-                    return "wrong equation3";
-                }
-            }
 
-        }*/
+
             // ================================== X =====================================
             for (int i = 0; i < mainEquation.length(); i++) { // x
                 if (mainEquation.charAt(i) == 'x') {
