@@ -2,25 +2,37 @@ package com.acrophillic.bitmcalculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText et;
-    TextView tv;
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnMultiple, btnMinus, btnPlus, btnPonitDevided, btnEqual, btnCancel, btnPoint;
+
+    private TextView tv;
+
+    private Button btn1;
+    private Button btn2;
+    private Button btn3;
+    private Button btn4;
+    private Button btn5;
+    private Button btn6;
+    Button btn7;
+    Button btn8;
+    Button btn9;
+    Button btn0;
+    Button btnMultiple;
+    Button btnMinus;
+    Button btnPlus;
+    Button btnPonitDevided;
+    Button btnEqual;
+    Button btnCancel;
+    Button btnPoint;
+
+    private ProcessManager processManager = new ProcessManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onLongClick(View v) {
                 et.setText("");
+                tv.setText("");
                 return true;
             }
         });
@@ -240,286 +253,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else if (st.charAt(st.length() - 1) == 'x' || st.charAt(st.length() - 1) == '/' || st.charAt(st.length() - 1) == '+' || st.charAt(st.length() - 1) == '-') {
                         st += ".";
                         et.setText(st);
-
                     }
                 } else {
                     et.setText(".");
                 }
-
-
                 break;
+
             case R.id.buttonEqual:
                 st = et.getText().toString();
                 if (st.length() != 0) {
-                    st = calculate(st);
+                    st = processManager.process(st);
                 }
                 tv.setText(st);
                 break;
         }
-    }
-
-    private String calculate(String mainEquation) {
-        try {
-
-
-
-            // ================================== X =====================================
-            for (int i = 0; i < mainEquation.length(); i++) { // x
-                if (mainEquation.charAt(i) == 'x') {
-                    String s1 = "", s2 = "";
-                    int p, n;
-
-                    for (p = i - 1; p >= 0; p--) {
-
-                        if (!Character.isDigit(mainEquation.charAt(p)) && mainEquation.charAt(p) != '.') {
-                            break;
-                        }
-                    }
-                    p++;
-                    s1 = mainEquation.substring(p, i);
-                    System.out.println(s1 + "-----------------------------s1");
-
-                    for (n = i + 1; n < mainEquation.length(); n++) {// *********************************************
-                        if (!Character.isDigit(mainEquation.charAt(n)) && mainEquation.charAt(n) != '.') {
-                            break;
-                        }
-
-                    }
-
-                    s2 = mainEquation.substring(i + 1, n);
-                    System.out.println(s2 + "______________________________s2");
-
-                    if (s1.isEmpty() || s2.isEmpty()) {
-                        continue;
-                    }
-
-                    Double res = Double.parseDouble(s1) * Double.parseDouble(s2);
-                    System.out.println("res " + res);
-                    s1 = "";
-                    s1 += res;
-
-                    System.out.println("s1************" + s1);
-
-                    s2 = mainEquation.substring(0, p);
-                    System.out.println("s2************" + s2);
-
-                    mainEquation = s2 + s1 + mainEquation.substring(n, mainEquation.length());
-
-                    System.out.println("************" + mainEquation);
-                    i = p - 1;
-                }
-            }
-            // ===============================/================================
-            for (int i = 0; i < mainEquation.length(); i++)
-
-            {
-                if (mainEquation.charAt(i) == '/') {
-                    String s1 = "", s2 = "";
-                    int p, n;
-
-                    for (p = i - 1; p >= 0; p--) {
-
-                        if (!Character.isDigit(mainEquation.charAt(p)) && mainEquation.charAt(p) != '.') {
-                            break;
-                        }
-                    }
-                    p++;
-                    s1 = mainEquation.substring(p, i);
-                    System.out.println(s1 + "-----------------------------s1");
-
-                    for (n = i + 1; n < mainEquation.length(); n++) {
-                        if (!Character.isDigit(mainEquation.charAt(n)) && mainEquation.charAt(n) != '.') {
-
-                            break;
-                        }
-                        // System.out.println(mainEquation.charAt(n));
-                    }
-
-                    s2 = mainEquation.substring(i + 1, n);
-                    System.out.println(s2 + "______________________________s2");
-
-                    if (s1.isEmpty() || s2.isEmpty()) {
-                        continue;
-                    }
-                    Double res = Double.parseDouble(s1) / Double.parseDouble(s2);
-                    System.out.println("res " + res);
-                    s1 = "";
-                    s1 += res;
-
-                    System.out.println("s1************" + s1);
-
-                    s2 = mainEquation.substring(0, p);
-                    System.out.println("s2************" + s2);
-
-                    mainEquation = s2 + s1 + mainEquation.substring(n, mainEquation.length());
-
-                    System.out.println("************" + mainEquation);
-                    i = p - 1;
-                }
-            }
-            // ==================================+=========================
-            for (int i = 0; i < mainEquation.length(); i++)
-
-            {
-
-                if (mainEquation.charAt(i) == '+' && i != 0) {
-
-                    String s1 = "", s2 = "";
-                    int p, n;
-
-                    for (p = i - 1; p >= 0; p--) {
-
-                        if (!Character.isDigit(mainEquation.charAt(p)) && mainEquation.charAt(p) != '.') {
-                            break;
-                        }
-                    }
-
-                    p++;
-                    if (p != 0 && (mainEquation.charAt(p - 1) == '-' || mainEquation.charAt(p - 1) == '+')) {
-                        p--;
-                    }
-                    s1 = mainEquation.substring(p, i);
-                    System.out.println(s1 + "-----------------------------s1");
-
-                    for (n = i + 1; n < mainEquation.length(); n++) {
-                        if (!Character.isDigit(mainEquation.charAt(n)) && mainEquation.charAt(n) != '.') {
-                            break;
-                        }
-                    }
-
-                    s2 = mainEquation.substring(i + 1, n);
-                    System.out.println(s2 + "______________________________s2");
-
-                    if (s1.isEmpty() || s2.isEmpty()) {
-                        continue;
-                    }
-                    Double res = Double.parseDouble(s1) + Double.parseDouble(s2);
-
-                    if (res > 0) {
-                        s1 = "+";
-                        s1 += res;
-                    } else {
-                        s1 = "";
-                        s1 += res;
-                    }
-
-                    System.out.println("res " + res);
-
-                    System.out.println("s1************" + s1);
-
-                    s2 = mainEquation.substring(0, p);
-                    System.out.println("s2************" + s2);
-
-                    i = p - 1;
-
-
-                    mainEquation = s2 + s1 + mainEquation.substring(n, mainEquation.length());
-
-                    System.out.println("************" + mainEquation);
-
-                }
-
-            }
-            // =============================== - ====================
-            for (int i = 0; i < mainEquation.length(); i++)
-
-            {
-                if (mainEquation.charAt(i) == '-' && i != 0) {
-                    String s1 = "", s2 = "";
-                    int p, n;
-
-                    for (p = i - 1; p >= 0; p--) {
-
-                        if (!Character.isDigit(mainEquation.charAt(p)) && mainEquation.charAt(p) != '.') {
-                            break;
-                        }
-                    }
-                    p++;
-                    if (p != 0 && (mainEquation.charAt(p - 1) == '-' || mainEquation.charAt(p - 1) == '+')) {
-                        p--;
-                    }
-                    s1 = mainEquation.substring(p, i);
-                    System.out.println(s1 + "-----------------------------s1");
-
-                    for (n = i + 1; n < mainEquation.length(); n++) {
-                        if (!Character.isDigit(mainEquation.charAt(n)) && mainEquation.charAt(n) != '.') {
-                            break;
-                        }
-                    }
-
-                    s2 = mainEquation.substring(i + 1, n);
-                    System.out.println(s2 + "______________________________s2");
-
-                    if (s1.isEmpty() || s2.isEmpty()) {
-                        continue;
-                    }
-                    Double res = Double.parseDouble(s1) - Double.parseDouble(s2);
-
-                    if (res > 0) {
-                        s1 = "+";
-                        s1 += res;
-                    } else {
-                        s1 = "";
-                        s1 += res;
-                    }
-
-                    System.out.println("res " + res);
-                    System.out.println("s1************" + s1);
-
-                    s2 = mainEquation.substring(0, p);
-                    System.out.println("s2************" + s2);
-
-                    mainEquation = s2 + s1 + mainEquation.substring(n, mainEquation.length());
-
-                    System.out.println("************" + mainEquation);
-                    i = p - 1;
-                }
-            }
-        } catch (Exception e) {
-            if (e.getMessage().equalsIgnoreCase("Infinity")) {
-                return "x/0 ! does not make any sense";
-            } else {
-                return "Not a equation";
-            }
-        }
-//====================================finalize===========================
-        Log.d("final raw value", mainEquation);
-        /*if (mainEquation.substring(mainEquation.length() - 2, mainEquation.length()).equals(".0")) {
-            mainEquation = mainEquation.substring(0, mainEquation.length() - 2);
-        }*/
-
-//        if(mainEquation.contains(".")){
-
-        while (mainEquation.contains(".")) {
-
-            if(mainEquation.equals(".")){
-                mainEquation = "";
-                break;
-            }else if (mainEquation.charAt(mainEquation.length() - 1) == '0') {
-                mainEquation = mainEquation.substring(0, mainEquation.length() - 2);
-
-            } else if (mainEquation.charAt(mainEquation.length() - 1) == '.') {
-                System.out.println("i am here................");
-                mainEquation.replace(".", "");
-                break;
-            } else {
-                break;
-            }
-        }
-
-
-//        }
-
-
-        if (!mainEquation.isEmpty() && mainEquation.charAt(0) == '+') {
-            mainEquation = mainEquation.substring(1, mainEquation.length());
-        }
-
-        if (mainEquation.equalsIgnoreCase("Infinity")) {
-            return "x/0 ! does not make sense";
-        }
-
-        Log.d("final raw return", mainEquation);
-        return mainEquation;
     }
 }
