@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.acrophillic.presentation.CreateOrEditActivity">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="First Name"
+        android:ems="10"
+        android:id="@+id/editTextFristName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Second Name"
+        android:ems="10"
+        android:id="@+id/editTextSecondName"
+        android:layout_below="@+id/editTextFristName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextFristName"
+        android:layout_alignEnd="@+id/editTextFristName"/>
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextEmail"
+        android:hint="E-mail(User Name)"
+        android:layout_below="@+id/editTextSecondName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextSecondName"
+        android:layout_alignEnd="@+id/editTextSecondName"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:hint="Phone"
+        android:id="@+id/editTextPhone"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextEmail"
+        android:layout_alignEnd="@+id/editTextEmail"/>
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="Enter your password"
+        android:id="@+id/editTextPassWord"
+        android:layout_below="@+id/editTextPhone"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_below="@+id/editTextPassWord"
+        android:layout_alignLeft="@+id/editTextPassWord"
+        android:layout_alignStart="@+id/editTextPassWord"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:hint="mm/dd/yyyy"
+        android:gravity="center"
+        android:onClick="setDOB"
+        android:id="@+id/editTextDOB"
+        android:layout_above="@+id/radioGroup"
+        android:layout_alignLeft="@+id/editTextConfirmPassword"
+        android:layout_alignStart="@+id/editTextConfirmPassword"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_above="@+id/imageView"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Sex: "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton android:id="@+id/radio_male"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="male"
+                     android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_female"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="female"
+                     android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton android:id="@+id/radio_other"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="other"
+                     android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageView"
+        android:onClick="takePicture"
+        android:src="@drawable/default_user"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="submit"
+        android:onClick="CreateEditAccount"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editTextPhone"
+        android:layout_alignEnd="@+id/editTextPhone"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+</RelativeLayout>
