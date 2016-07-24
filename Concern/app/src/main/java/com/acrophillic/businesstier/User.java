@@ -2,11 +2,13 @@ package com.acrophillic.businesstier;
 
 import android.graphics.Bitmap;
 
+
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
 
 
-public class User {
+public class User implements Serializable {
 
 
    private int id;
@@ -50,11 +52,28 @@ public class User {
   this.picture = picture;
  }
 
- public User(int id, String firstName, String secondName, Calendar DOB, byte[] picture) {
+ public User(int id, String firstName, String secondName, String email, String phone, String passWord, Calendar DOB, String sex, byte[] picture) {
   this.id = id;
   this.firstName = firstName;
   this.secondName = secondName;
+  this.email = email;
+  this.phone = phone;
+  this.passWord = passWord;
   this.DOB = DOB;
+  this.sex = sex;
+  this.picture = picture;
+ }
+
+ public User(int id, String firstName, String secondName, String email, String phone, String passWord,String confirmPassWord, Calendar DOB, String sex, byte[] picture) {
+  this.id = id;
+  this.firstName = firstName;
+  this.secondName = secondName;
+  this.email = email;
+  this.phone = phone;
+  this.passWord = passWord;
+  this.confirmPassWord = confirmPassWord;
+  this.DOB = DOB;
+  this.sex = sex;
   this.picture = picture;
  }
 

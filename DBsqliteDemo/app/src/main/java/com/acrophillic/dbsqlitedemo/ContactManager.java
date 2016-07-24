@@ -36,10 +36,11 @@ public class ContactManager {
         this.open();
 
         ContentValues cv = new ContentValues();
+
         cv.put(DataBaseHelper.COL_NAME, contactTO.getName());
-        cv.put(DataBaseHelper.COL_GROUPNAME, contactTO.getPhoneNo());
+        cv.put(DataBaseHelper.COL_GROUPNAME, contactTO.getGroupName());
         cv.put(DataBaseHelper.COL_PHONENO, contactTO.getPhoneNo());
-        cv.put(DataBaseHelper.COL_EMAILID, contactTO.getPhoneNo());
+        cv.put(DataBaseHelper.COL_EMAILID, contactTO.getEmailId());
 
         System.out.println(contactTO.getName()+"");
         Log.d("Calculate Area", contactTO.getName()+"");

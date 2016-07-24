@@ -1,9 +1,12 @@
 package com.acrophillic.presentation;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import android.widget.Toast;
 import com.acrophillic.businesstier.Manager;
 import com.acrophillic.businesstier.User;
 import com.acrophillic.concern.R;
+
+import java.text.SimpleDateFormat;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -32,8 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         intialization();
 
-        intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
+        int id = getIntent().getIntExtra("id", 0);
 
 
         try {
@@ -51,9 +55,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setProfile() {
         Log.d("sys", "let me set here.....................");
-        imageView = (ImageView) findViewById(R.id.imageViewProfile);
+
+        byte [] bytes = user.getPicture();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//        Bitmap photo = (Bitmap) user.getPicture();
+        imageView.setImageBitmap(bitmap);
+
+//        imageView.setImageBitmap(user.getDOB());
         tvFullName.setText(user.getFirstName()+ " "+user.getSecondName());
-        tvDOB = (TextView) findViewById(R.id.textViewDOB);
+
+//        new SimpleDateFormat("MMM").format(cal.getTime())
+        tvDOB.setText(new SimpleDateFormat("dd-MMM-yyyy").format(user.getDOB().getTime()).toString());
 //        lvPost = (ListView) findViewById(R.id.listViewPost);
 
     }
@@ -63,7 +75,18 @@ public class ProfileActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageViewProfile);
         tvFullName = (TextView) findViewById(R.id.textViewFullName);
         tvDOB = (TextView) findViewById(R.id.textViewDOB);
-        lvPost = (ListView) findViewById(R.id.listViewPost);
+//        lvPost = (ListView) findViewById(R.id.listViewPost);
+
+    }
+
+    public void editProfile(View view) {
+
+        intent = new Intent(this, CreateOrEditActivity.class);
+        intent.putExtra("TO", user);
+        startActivity(intent);
+//        intent.p
+
+
 
     }
 }

@@ -33,6 +33,10 @@ public class DataBase extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public DataBase(Context context, String name) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
     private static final String CREATE_CONTACT_TABLE = " CREATE TABLE " + TABLE_NAME +
             "( " + COL_ID + " INTEGER PRIMARY KEY," + COL_FIRST_NAME + " TEXT, "+COL_SECOND_NAME + " TEXT, "+ COL_EMAIL_ID + " TEXT, "+ COL_PHONE_NO + " TEXT, "+ COL_PASS + " TEXT, "+ COL_DOB + " calendar, "+ COL_SEX + " TEXT, "
             + COL_PHOTO + " BLOB )";

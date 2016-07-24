@@ -2,11 +2,11 @@ package com.acrophillic.presentation;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -38,8 +38,12 @@ public class CreateOrEditActivity extends AppCompatActivity {
 
 //    Bitmap photo;
 
+
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
+
+    User user = null;
+    Intent intent;
 
 
     @Override
@@ -47,7 +51,37 @@ public class CreateOrEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_or_edit);
 
+
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("TO");
         initialization();
+
+        if (user != null) {
+            editProfile();
+        }
+
+
+    }
+
+    private void editProfile() {
+        etFirstName.setText(user.getFirstName());
+        etSecondName.setText(user.getSecondName());
+        etEmail.setText(user.getEmail());
+        etPhone.setText(user.getPhone());
+        etPassWord.setText(user.getPassWord());
+        etConfirmPassWord.setText(user.getPassWord());
+
+        if (user.getSex().equals("Male")) {
+            rbMale.setChecked(true);
+        } else if (user.getSex().equals("Female")) {
+            rbFemale.setChecked(true);
+        } else {
+            rbOther.setChecked(true);
+        }
+
+        byte[] bytes = user.getPicture();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        imageView.setImageBitmap(bitmap);
     }
 
     public void CreateEditAccount(View view) {
@@ -65,15 +99,30 @@ public class CreateOrEditActivity extends AppCompatActivity {
         byte[] byteArray = stream.toByteArray();*/
 
 //        image = (ImageView)findViewById(R.id.qrcode);
-        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+
+
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-        byte[] byteArray =stream.toByteArray();
-
-        User user = new User(etFirstName.getText().toString(), etSecondName.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(), etPassWord.getText().toString(), etConfirmPassWord.getText().toString(), DOB, stSex, byteArray);
+        byte[] byteArray = stream.toByteArray();
 
 
-        new Manager().addNewUser(this, user);
+        try {
+            if (user == null) {
+                user = new User(etFirstName.getText().toString(), etSecondName.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(), etPassWord.getText().toString(), etConfirmPassWord.getText().toString(), DOB, stSex, byteArray);
+                new Manager().addNewUser(this, user);
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            } else {
+                User updatedUser = new User(this.user.getId(), etFirstName.getText().toString(), etSecondName.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(), etPassWord.getText().toString(), etConfirmPassWord.getText().toString(), DOB, stSex, byteArray);
+                new Manager().updateUserManager(this, updatedUser);
+                intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("id",this.user.getId());
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
     }
 

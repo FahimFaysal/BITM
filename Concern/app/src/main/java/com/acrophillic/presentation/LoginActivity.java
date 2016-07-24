@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("login", "i am here-----------------");
             int id = new Manager().getUserByNamePass(this, etUserName.getText().toString(), etPassWord.getText().toString());
 
+            Log.d("login", "i am here-----------------id:"+id);
+
+
             intent = new Intent(this, ProfileActivity.class);
             intent.putExtra("id", id);
             startActivity(intent);
