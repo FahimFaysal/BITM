@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.acrophillic.api.TO;
+import com.acrophillic.api.TempSharedPreference;
 import com.acrophillic.api.WeatherForecast;
 import com.acrophillic.business.GridViewCustomAdapter;
 import com.acrophillic.tourmate.R;
@@ -34,24 +35,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-
         initialization();
 
         setWeather();
 
 
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                    long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 String selectedItem;
 
-                if(position == 0){
-                    selectedItem="profile";
-                     intent = new Intent(MainActivity.this, LoginActivity.class);
+                if (position == 0) {
+                    selectedItem = "profile";
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
                /* else if(position == 1){
@@ -112,8 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 }*/
 
 
-
-
             }
 
             private ContentResolver getContentResolver() {
@@ -126,19 +121,29 @@ public class MainActivity extends AppCompatActivity {
     private void setWeather() {
 
         //        23.782956,90.357818
-        TO to =  new WeatherForecast().getPoetsName( 23.782956,90.357818);
+        TO to =  new WeatherForecast().getWeather(23.782956, 90.357818, this);
 
-        Log.e("weather", to.toString());
-//        (68°F - 32) × 5/9 = 20 °C
-        Double temp = (to.getTemp()-32)*(5/9);
+        if (to == null) {
+            Log.e("weather is null", to.toString());
+        } else {
+            Log.e("weather", to.toString());
+        }
 
-        textViewTemp.setText(temp+"");
+         to =   new TempSharedPreference(this).get();
 
-//        Log.e("weather", to.toString()+temp);
 
+        if(to != null) {
+            Double temp = to.getTemp() - 273.15;
+            Log.e("weather", temp+"");
+
+            textViewTemp.setText(to.getTemp() + ", "+ to.getDescription()+", "+to.getWindSpeed());
+            textViewDes.setText(to.getTempMin() + " | " + to.getTempMax() + ", Humidity"+to.getHumidity() );
+            textViewLocal.setText(to.getName() + ", " + to.getCountry());
+
+        }
     }
 
-    private  void initialization(){
+    private void initialization() {
         gridView = (GridView) findViewById(R.id.gridView1);
         grisViewCustomAdapter = new GridViewCustomAdapter(this, 0);
         gridView.setAdapter(grisViewCustomAdapter);

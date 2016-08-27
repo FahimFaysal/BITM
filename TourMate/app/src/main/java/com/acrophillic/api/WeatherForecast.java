@@ -1,7 +1,11 @@
 package com.acrophillic.api;
 
+import com.acrophillic.api.TO;
+
+import android.content.Context;
 import android.util.Log;
 
+import com.acrophillic.api.TO;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,16 +21,16 @@ import org.json.JSONObject;
  */
 public class WeatherForecast {
 
-    static TO to = new TO();
-//
+    static TO to;// = new TO();
+
     String url = "http://api.openweathermap.org/data/2.5/weather?lat=";//23.7810133&lon=90.361407&appid=8c866b47aba77a7356accfa17874fe93";
 
 
-    public TO getPoetsName(double latitude, double longitude) {
+    public TO getWeather(double latitude, double longitude, final Context context) {
         to = new TO();
-        Log.e("latitude", latitude+"");
-        Log.e("longitude", longitude+"");
-        url += latitude+"&lon="+longitude+"&appid=8c866b47aba77a7356accfa17874fe93";
+        Log.e("latitude", latitude + "");
+        Log.e("longitude", longitude + "");
+        url += latitude + "&lon=" + longitude + "&appid=8c866b47aba77a7356accfa17874fe93";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
 
@@ -39,9 +43,8 @@ public class WeatherForecast {
                     JSONObject jsonObjectMain = response.getJSONObject("main");
 
 
-                    Log.e("temp*", jsonObjectMain.getDouble("temp")+"");
+                    Log.e("temp", jsonObjectMain.getDouble("temp") + "");
                     to.setTemp(jsonObjectMain.getDouble("temp"));
-                    Log.e("temp*", to.getTemp()+"------------");
 
                     Log.e("pressure", jsonObjectMain.getString("pressure"));
                     to.setPressure(jsonObjectMain.getDouble("pressure"));
@@ -75,7 +78,11 @@ public class WeatherForecast {
 
                     Log.e("name", response.getString("name"));
                     to.setName(response.getString("name"));
+                    Log.e("------------: 1", to.toString());
+//                    return to;
 
+                    new TempSharedPreference(context).set(to);
+                    Log.e("------------: 2", to.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -94,8 +101,7 @@ public class WeatherForecast {
 
 
         AppController.getInstance().addToRequestQueue(request);
-//        Log.e("retun: ", string);
-        Log.e("retun**: ", to.toString());
+        Log.e("retun:::: ", to.toString());
         return to;
     }
 

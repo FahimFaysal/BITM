@@ -87,7 +87,7 @@
         android:layout_below="@+id/editTextPassWord"
         android:layout_alignLeft="@+id/editTextPassWord"
         android:layout_alignStart="@+id/editTextPassWord"/>
-
+    <!-- android:onClick="setDOB"-->
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         android:ems="10"
         android:hint="mm/dd/yyyy"
         android:gravity="center"
-        android:onClick="setDOB"
+
         android:id="@+id/editTextDOB"
         android:layout_above="@+id/radioGroup"
         android:layout_alignLeft="@+id/editTextConfirmPassword"

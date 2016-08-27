@@ -32,10 +32,24 @@ public class LoginActivity extends AppCompatActivity {
 
          cbKeepMeLogin = (CheckBox)findViewById(R.id.checkBox);
 
+
+        int id = getIntent().getIntExtra("id", 0);
+        getIntent().getStringExtra("email");
+
+        Log.e("fahim",  getIntent().getStringExtra("email")+"");
+        if( getIntent().getStringExtra("email") != null &&  !getIntent().getStringExtra("email").isEmpty()){
+            etUserName.setText( getIntent().getStringExtra("email"));
+            etPassWord.setText( getIntent().getStringExtra("pass"));
+            cbKeepMeLogin.setChecked(true);
+
+            Log.e("fahim",  "************************************");
+        }
+
     }
 
     public void CreateAccount(View view){
     intent = new Intent(getApplicationContext(), CreateOrEditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     startActivity(intent);
     }
 
@@ -51,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
             intent = new Intent(this, MyTourActivity.class);
             intent.putExtra("id", id);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         catch (Exception e){

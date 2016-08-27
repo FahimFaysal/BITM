@@ -29,12 +29,17 @@
         </activity>
         <activity android:name="com.acrophillic.presentation.CreateOrEditActivity"/>
         <activity android:name="com.acrophillic.presentation.LoginActivity"/>
-        <activity android:name="com.acrophillic.presentation.MyTourActivity">
-        </activity>
         <activity
             android:name="com.acrophillic.presentation.MomentActivity"
             android:label="@string/title_activity_moment"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name="com.acrophillic.presentation.MyTourActivity"
+            android:label="@string/title_activity_my_tour"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name="com.acrophillic.presentation.CreateTourActivity">
         </activity>
     </application>
 

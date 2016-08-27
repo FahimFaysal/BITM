@@ -1,11 +1,13 @@
 package com.acrophillic.presentation;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +16,16 @@ import android.widget.Toast;
 import com.acrophillic.tourmate.R;
 import com.acrophillic.business.Manager;
 import com.acrophillic.business.User;
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.view.View;
+import android.widget.EditText;
+
+import java.util.Calendar;
 
 
 import java.io.ByteArrayOutputStream;
@@ -27,6 +39,9 @@ public class CreateOrEditActivity extends AppCompatActivity {
     private EditText etPhone;
     private EditText etPassWord;
     private EditText etConfirmPassWord;
+    private EditText etDOB;
+
+
 
     private RadioButton rbMale;
     private RadioButton rbFemale;
@@ -70,6 +85,7 @@ public class CreateOrEditActivity extends AppCompatActivity {
         etPhone.setText(user.getPhone());
         etPassWord.setText(user.getPassWord());
         etConfirmPassWord.setText(user.getPassWord());
+//        etDOB
 
         if (user.getSex().equals("Male")) {
             rbMale.setChecked(true);
@@ -106,6 +122,20 @@ public class CreateOrEditActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
         byte[] byteArray = stream.toByteArray();
 
+        String stDOB = etDOB.getText().toString();//12/12/2000
+
+        String year = stDOB.substring(6,10);
+        String month   = stDOB.substring(3,5);
+        String day = stDOB.substring(0,2);
+
+        Log.e("stcal", day+", "+month+", "+year);
+
+        DOB  = Calendar.getInstance();
+
+        DOB.set(Integer.parseInt(year), Integer.parseInt(month)+1, Integer.parseInt(day));
+
+        Log.e("cal", DOB.toString());
+
 
         try {
             if (user == null) {
@@ -116,8 +146,9 @@ public class CreateOrEditActivity extends AppCompatActivity {
             } else {
                 User updatedUser = new User(this.user.getId(), etFirstName.getText().toString(), etSecondName.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(), etPassWord.getText().toString(), etConfirmPassWord.getText().toString(), DOB, stSex, byteArray);
                 new Manager().updateUserManager(this, updatedUser);
-//                intent = new Intent(this, ProfileActivity.class);
-                intent.putExtra("id",this.user.getId());
+                intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("pass", this.user.getPassWord());///////////////////////////////////////////////
+                intent.putExtra("email",this.user.getEmail());
                 startActivity(intent);
             }
         } catch (Exception e) {
@@ -170,6 +201,20 @@ public class CreateOrEditActivity extends AppCompatActivity {
         etPhone = (EditText) findViewById(R.id.editTextPhone);
         etPassWord = (EditText) findViewById(R.id.editTextPassWord);
         etConfirmPassWord = (EditText) findViewById(R.id.editTextConfirmPassword);
+        etDOB = (EditText)findViewById(R.id.editTextDOB);
+
+    /*    etDOB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+
+                    DatePickerFragment datePickerFragment = new DatePickerFragment(view);
+                    FragmentTransaction ft= getFragmentManager().beginTransaction();
+                    datePickerFragment.show(ft,"DatePicker");
+                }
+            }
+        });*/
+
 
         rbMale = (RadioButton) findViewById(R.id.radio_male);
         rbFemale = (RadioButton) findViewById(R.id.radio_female);
@@ -179,10 +224,39 @@ public class CreateOrEditActivity extends AppCompatActivity {
 
     }
 
-    public void setDOB(View view) {
-        DOB = Calendar.getInstance();
-        Toast.makeText(this, DOB.toString(), Toast.LENGTH_SHORT).show();
+  public void setDOB(View view) {
+//        DOB = Calendar.getInstance();
+//        Toast.makeText(this, DOB.toString(), Toast.LENGTH_SHORT).show();
+
+      etDOB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+          @Override
+          public void onFocusChange(View view, boolean b) {
+              if(b){
+                  DatePickerFragment datePickerFragment = new DatePickerFragment(view);
+                  FragmentTransaction ft= getFragmentManager().beginTransaction();
+                  datePickerFragment.show(ft,"DatePicker");
+              }
+          }
+      });
+
+
     }
+
+/*   public  void  onStart(){
+        super.onStart();
+//        editTextBirthDate = (EditText) findViewById(R.id.editTextBirthDate);
+        etDOB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    DatePickerFragment datePickerFragment = new DatePickerFragment(view);
+                    FragmentTransaction ft= getFragmentManager().beginTransaction();
+                    datePickerFragment.show(ft,"DatePicker");
+                }
+            }
+        });
+
+    }*/
 
 
 }

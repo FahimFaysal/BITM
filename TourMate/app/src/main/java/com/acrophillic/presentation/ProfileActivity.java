@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvFullName.setText(user.getFirstName()+ " "+user.getSecondName());
 
 //        new SimpleDateFormat("MMM").format(cal.getTime())
-        tvDOB.setText(new SimpleDateFormat("dd-MMM-yyyy").format(user.getDOB().getTime()).toString());
+        tvDOB.setText(new SimpleDateFormat("dd/MM/yyyy").format(user.getDOB().getTime()).toString());
 //        lvPost = (ListView) findViewById(R.id.listViewPost);
 
     }
