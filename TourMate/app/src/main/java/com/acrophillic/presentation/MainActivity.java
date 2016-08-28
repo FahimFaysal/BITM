@@ -121,15 +121,15 @@ public class MainActivity extends AppCompatActivity {
     private void setWeather() {
 
         //        23.782956,90.357818
-        TO to =  new WeatherForecast().getWeather(23.782956, 90.357818, this);
+       /* TO to = */ new WeatherForecast().getWeather(23.782956, 90.357818, this);
 
-        if (to == null) {
+     /*   if (to == null) {
             Log.e("weather is null", to.toString());
         } else {
             Log.e("weather", to.toString());
-        }
+        }*/
 
-         to =   new TempSharedPreference(this).get();
+        TO to =   new TempSharedPreference(this).get();
 
 
         if(to != null) {

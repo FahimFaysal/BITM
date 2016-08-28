@@ -176,7 +176,7 @@ public class CreateOrEditActivity extends AppCompatActivity {
                 break;
         }
 
-        Toast.makeText(this, stSex, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, stSex, Toast.LENGTH_SHORT).show();
     }
 
 

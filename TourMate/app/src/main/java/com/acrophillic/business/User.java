@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
 
+/**
+ * Created by fahim on 7/23/2016.
+ */
 
 public class User implements Serializable {
 

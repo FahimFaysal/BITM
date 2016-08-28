@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.acrophillic.tourmate.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -48,8 +49,11 @@ public class TourAdapter extends ArrayAdapter {
         tvBudget = (TextView)convertView.findViewById(R.id.textViewBudget);
 
         tvEventName.setText(tourList.get(position).getTourName());
-        tvPlace.setText(tourList.get(position).getFromPlace());
-        tvDate.setText(tourList.get(position).getStartDate()+"");
+        tvPlace.setText(tourList.get(position).getToPlace()+" to "+tourList.get(position).getFromPlace());
+//        tvDate.setText(tourList.get(position).getStartDate()+"");
+
+        tvDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(tourList.get(position).getStartDate().getTime()).toString()+" to "+new SimpleDateFormat("dd/MM/yyyy").format(tourList.get(position).getEndDate().getTime()).toString());
+//        tvDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(user.getDOB().getTime()).toString());
         tvBudget.setText(tourList.get(position).getBudget()+"");
 
 

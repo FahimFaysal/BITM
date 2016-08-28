@@ -8,14 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.acrophillic.business.Tour;
+import com.acrophillic.business.TourAdapter;
+import com.acrophillic.persistence.ServiceTour;
 import com.acrophillic.tourmate.R;
+
+import java.util.ArrayList;
 
 public class MyTourActivity extends AppCompatActivity {
 
-    ListView listView;
+   private ListView listView;
+   private TourAdapter tourAdapter;
+
+
+
+    private ArrayList<Tour> list;
 
     public static int userId;
 
@@ -29,6 +41,33 @@ public class MyTourActivity extends AppCompatActivity {
         userId = getIntent().getIntExtra("id", 0);
 
         Log.e("my tour id", userId+"");
+
+        list = new ServiceTour(this).allTour(userId);
+
+        Log.e("my tour list", list+"");
+
+
+        tourAdapter = new TourAdapter(MyTourActivity.this, list);
+
+        Log.e("check**",list.toString());
+
+        listView = (ListView) findViewById(R.id.listViewTour);
+        listView.setAdapter(tourAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(getApplicationContext(), arrayList.get(i), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(MyTourActivity.this, TourDetailActivity.class);
+                intent.putExtra("tour", list.get(i));
+                startActivity(intent);
+
+            }
+        });
+
 
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

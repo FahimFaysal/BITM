@@ -26,7 +26,7 @@ public class WeatherForecast {
     String url = "http://api.openweathermap.org/data/2.5/weather?lat=";//23.7810133&lon=90.361407&appid=8c866b47aba77a7356accfa17874fe93";
 
 
-    public TO getWeather(double latitude, double longitude, final Context context) {
+    public void getWeather(double latitude, double longitude, final Context context) {
         to = new TO();
         Log.e("latitude", latitude + "");
         Log.e("longitude", longitude + "");
@@ -102,7 +102,7 @@ public class WeatherForecast {
 
         AppController.getInstance().addToRequestQueue(request);
         Log.e("retun:::: ", to.toString());
-        return to;
+//        return to;
     }
 
 }

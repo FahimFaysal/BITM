@@ -41,6 +41,10 @@
         </activity>
         <activity android:name="com.acrophillic.presentation.CreateTourActivity">
         </activity>
+        <activity android:name="com.acrophillic.presentation.TourDetailActivity">
+        </activity>
+        <activity android:name="com.acrophillic.presentation.CreateMomentActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -2,14 +2,16 @@ package com.acrophillic.business;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.io.Serializable;
 
 /**
  * Created by fahim on 8/26/2016.
  */
-public class Tour {
+public class Tour implements Serializable {
 
     private int usrId;
     private int tourId;
+
 
     private String tourName;
     private String toPlace;
